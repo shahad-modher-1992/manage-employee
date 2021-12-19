@@ -15,6 +15,16 @@ class CreateEmployeesTable extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->id();
+            $table->string("fname");
+            $table->string("lname");
+            $table->string("mname")->nullable();
+            $table->string('address', 120);
+            $table->foreignId('department_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('city_id')->constrained()->cascadeOnDelete();
+            $table->foreignId('country_id')->constrained()->cascadeOnDelete();
+            $table->char('zip_code');
+            $table->date('birthdate')->nullable();
+            $table->date('date_hired')->nullable();
             $table->timestamps();
         });
     }
