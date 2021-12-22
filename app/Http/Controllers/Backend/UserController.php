@@ -4,7 +4,10 @@ namespace App\Http\Controllers\Backend;
 
 use App\Models\User;
 use Illuminate\Http\Request;
+use App\Http\Requests\UserRequest;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Hash;
+use App\Http\Requests\UpdateUserRequest;
 
 class UserController extends Controller
 {
@@ -13,9 +16,12 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $users = User::get();
+        if($request->has('search')) {
+            $users = User::where('username' , 'like', '%' . $request->search . '%')->get();
+        }
         return view('users.index', compact('users'));
     }
 
@@ -35,9 +41,10 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(UserRequest $request)
     {
-        //
+        User::create($request->all());
+        return redirect()->route('users.index')->with('message', 'User Created Successfully');
     }
 
     /**
@@ -69,9 +76,11 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateUserRequest $request, User $user)
     {
-        //
+        $user->update($request->all());
+        return redirect()->route('users.index')->with('message', 'User Updated Successfully');
+
     }
 
     /**
@@ -80,8 +89,25 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        if(auth()->user()->id == $user->id) {
+            return redirect()->route('users.index')->with('message', 'you are Deleting your self');
+        }
+        $user->delete();
+        return redirect()->route('users.index')->with('message', 'User Deleted Successfully');
+
+    }
+
+
+    public function changePassword(User $user, Request $request) {
+
+        $request->validate([
+        'password' => ['required', 'string', 'min:8'],
+        ]);
+        $user->update([
+            'password' => Hash::make($request->password)
+        ]);
+        return redirect()->route('users.index')->with('message', 'Password Updated Successfully');
     }
 }

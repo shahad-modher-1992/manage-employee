@@ -25,3 +25,4 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 Route::resource('users', UserController::class);
+Route::post('changepassword/{user}', [UserController::class, 'changePassword'])->name('change.password');
