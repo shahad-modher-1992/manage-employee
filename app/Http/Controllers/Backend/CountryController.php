@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Backend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Country;
+use App\Http\Requests\CountryRequest;
 
 class CountryController extends Controller
 {
@@ -35,9 +36,10 @@ class CountryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CountryRequest $request)
     {
-        //
+        Country::create($request->all());
+        return redirect()->route('countries.index')->with('message', 'this item is added to country');
     }
 
     /**
@@ -69,9 +71,11 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CountryRequest $request, Country $country)
     {
-        //
+        $country->update($request->all());
+        return redirect()->route('countries.index')->with('message', 'this item is update to country');
+
     }
 
     /**
@@ -80,8 +84,10 @@ class CountryController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Country $country)
     {
-        //
+        $country->delete();
+        return redirect()->route('countries.index')->with('message', 'this item is deleted');
+
     }
 }
