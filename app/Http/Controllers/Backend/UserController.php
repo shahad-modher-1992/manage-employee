@@ -80,7 +80,6 @@ class UserController extends Controller
     {
         $user->update($request->all());
         return redirect()->route('users.index')->with('message', 'User Updated Successfully');
-
     }
 
     /**

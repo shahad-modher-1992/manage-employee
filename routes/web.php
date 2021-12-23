@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\CountryController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,5 +25,9 @@ Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
+// routes for users
 Route::resource('users', UserController::class);
 Route::post('changepassword/{user}', [UserController::class, 'changePassword'])->name('change.password');
+
+// routes for country
+Route::resource('countries', CountryController::class);
