@@ -14,9 +14,13 @@ class CountryController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
+
         $countries = Country::get();
+        if($request->has('search')) {
+            $countries = Country::where('name', 'like', '%' . $request->search . '%')->orWhere('country_code', 'like', '%' . $request->search . '%')->get();
+        }
         return view('country.index', compact('countries'));
     }
 

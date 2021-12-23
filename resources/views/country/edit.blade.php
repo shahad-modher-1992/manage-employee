@@ -8,7 +8,7 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Update Country') }}
-                    <a href="{{ route('users.index')}}" class="float-right">Back</a>
+                    <a href="{{ route('countries.index')}}" class="float-right">Back</a>
                 </div>
 
                 <div class="card-body">
