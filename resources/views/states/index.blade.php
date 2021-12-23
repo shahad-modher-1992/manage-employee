@@ -2,7 +2,7 @@
 @section('content')
 
     <div class="d-sm-flex align-items-center justify-content-between mb-4">
-        <h1 class="h3 mb-0 text-gray-800">Countries</h1>
+        <h1 class="h3 mb-0 text-gray-800">States</h1>
     </div>
     <div class="row">
         <div class="card mx-auto">
@@ -12,11 +12,11 @@
             <div class="card-header">
                 <div class="row">
                 <div class="col">
-                      <form method="GET" action="{{ route('countries.index') }}">
+                      <form method="GET" action="{{ route('states.index') }}">
                         <div class="form-row align-items-center">
                             <div class="col-auto">
                                 <label class="sr-only" for="inlineFormInput">Search</label>
-                                <input type="search" name="search" class="form-control mb-2" id="inlineFormInput" placeholder="Jane Doe">
+                                <input type="search" name="search" class="form-control mb-2" id="inlineFormInput" placeholder="Search">
                             </div>
 
                             <div class="col-auto">
@@ -28,7 +28,7 @@
 
                 </div>
                 <div>
-                    <a href="{{ route('countries.create') }}" class="btn btn-primary mb-2">Create</a>
+                    <a href="{{ route('states.create') }}" class="btn btn-primary mb-2">Create</a>
                 </div>
             </div>
             </div>
@@ -37,25 +37,25 @@
                     <thead>
                         <tr>
                             <th scope="col">Id</th>
+                            <th scope="col">State Name</th>
                             <th scope="col">Country Name</th>
-                            <th scope="col">Country Code</th>
                             <th scope="col">Manage</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($countries as $country)
+                        @foreach ($states as $state)
                             <tr>
-                                <td scope="row">{{ $country->id }}</td>
-                                <td>{{ $country->name }}</td>
-                                <td>{{ $country->country_code }}</td>
+                                <td scope="row">{{ $state->id }}</td>
+                                <td>{{ $state->name }}</td>
+                                <td>{{ $state->country->name }}</td>
                                 <td>
-                                    <a href="{{ route('countries.edit', $country->id) }}" class="btn btn-success"
+                                    <a href="{{ route('states.edit', $state->id) }}" class="btn btn-success"
                                         style="display: inline-block">Edit</a>
-                                    <form action=" {{ route('countries.destroy', $country->id) }}  " method="POST"
+                                    <form action=" {{ route('states.destroy', $state->id) }}  " method="POST"
                                         style="display: inline-block">
                                         @csrf
                                         @method('DELETE')
-                                        <button class="btn btn-danger"> Delete {{ $country->country_code }}</button>
+                                        <button class="btn btn-danger"> Delete {{ $state->name }}</button>
                                     </form>
                                 </td>
                             </tr>

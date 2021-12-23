@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\UserController;
+use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\CountryController;
 
 /*
@@ -31,3 +32,6 @@ Route::post('changepassword/{user}', [UserController::class, 'changePassword'])-
 
 // routes for country
 Route::resource('countries', CountryController::class);
+
+//routes for state
+Route::resource('states', StateController::class);
