@@ -7,6 +7,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\StateController;
 use App\Http\Controllers\Backend\CountryController;
+use App\Http\Controllers\Backend\DepartmentController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,3 +40,6 @@ Route::resource('states', StateController::class);
 
 //route for City
 Route::resource('cities', CityController::class);
+
+//route for department
+Route::resource('departments', DepartmentController::class);

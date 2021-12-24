@@ -1,25 +1,25 @@
 @extends('layouts.main')
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Citeis</h1>
+    <h1 class="h3 mb-0 text-gray-800">Departments</h1>
 </div>
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">{{ __('Update City') }}
-                    <a href="{{ route('cities.index')}}" class="float-right">Back</a>
+                <div class="card-header">{{ __('Edit Department') }}
+                    <a href="{{ route('departments.index')}}" class="float-right">Back</a>
                 </div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('cities.update', $city->id) }}">
+                    <form method="POST" action="{{ route('departments.update', $department->id) }}">
                         @csrf
                         @method('put')
                         <div class="row mb-3">
                             <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name' , $city->name)}}" required autocomplete="name" autofocus>
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name' , $department->name)}}" required autocomplete="name" autofocus>
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -28,7 +28,7 @@
                                 @enderror
                             </div>
                         </div>
-                        <div class="row mb-3">
+                        {{-- <div class="row mb-3">
                             <label for="state_id" class="col-md-4 col-form-label text-md-right">{{ __('State ') }}</label>
                             <div class="col-md-6">
                                 <select id="state_id" class="form-control @error('state_id') is-invalid @enderror" name="state_id" value="{{ old('state_id') }}" required autocomplete="state_id" autofocus>
@@ -44,7 +44,7 @@
                                     </span>
                                 @enderror
                             </div>
-                        </div>
+                        </div> --}}
                     
 
                         <div class="row mb-0">
