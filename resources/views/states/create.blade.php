@@ -29,7 +29,7 @@
                             </div>
                         </div>
                         <div class="row mb-3">
-                            <label for="country_code" class="col-md-4 col-form-label text-md-right">{{ __('country Name ') }}</label>
+                            <label for="country_code" class="col-md-4 col-form-label text-md-right">{{ __('country  ') }}</label>
                             <div class="col-md-6">
                                 <select id="country_code" class="form-control @error('country_id') is-invalid @enderror" name="country_id" value="{{ old('country_id') }}" required autocomplete="country_id" autofocus>
                                 <option value="">Select</option>

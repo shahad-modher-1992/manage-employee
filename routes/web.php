@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CityController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Backend\UserController;
 use App\Http\Controllers\Backend\StateController;
@@ -35,3 +36,6 @@ Route::resource('countries', CountryController::class);
 
 //routes for state
 Route::resource('states', StateController::class);
+
+//route for City
+Route::resource('cities', CityController::class);

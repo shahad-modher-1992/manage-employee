@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\City;
+use App\Models\State;
+use Illuminate\Http\Request;
 use App\Http\Requests\StoreCityRequest;
 use App\Http\Requests\UpdateCityRequest;
 
@@ -13,9 +15,13 @@ class CityController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
+        $cities = City::get();
+        if($request->has('search')) {
+            $cities = City::where('name', 'like', '%' . $request->search . '%')->get();
+        }
+        return view('cities.index', compact('cities'));
     }
 
     /**
@@ -25,7 +31,8 @@ class CityController extends Controller
      */
     public function create()
     {
-        //
+        $states = State::get();
+        return view('cities.create', compact('states'));
     }
 
     /**
@@ -36,7 +43,9 @@ class CityController extends Controller
      */
     public function store(StoreCityRequest $request)
     {
-        //
+        City::create($request->all());
+        return redirect()->route('cities.index')->with('message', 'City Created Successfuly');
+
     }
 
     /**
@@ -58,7 +67,8 @@ class CityController extends Controller
      */
     public function edit(City $city)
     {
-        //
+         $states = State::get();
+         return view('cities.edit', compact('city', 'states'));
     }
 
     /**
@@ -70,7 +80,8 @@ class CityController extends Controller
      */
     public function update(UpdateCityRequest $request, City $city)
     {
-        //
+         $city->update($request->all());
+         return redirect()->route('cities.index')->with('message', 'City Update Successfuly');
     }
 
     /**
@@ -81,6 +92,7 @@ class CityController extends Controller
      */
     public function destroy(City $city)
     {
-        //
+        $city->delete();
+        return redirect()->route('cities.index')->with('message', 'City Deleted Successfuly');
     }
 }
